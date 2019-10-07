@@ -6,7 +6,9 @@ $(document).ready(function() {
 });
 
 function newGame() {
-  init();
+  init(); // 初始化棋盘格
+  getOneNumber(); // 随机产生一个数字
+  getOneNumber(); // 随机产生一个数字
 }
 
 function init() {
@@ -34,7 +36,7 @@ function updateBoardView() {
   for (var i = 0; i < 4; i++)
     for (var j = 0; j < 4; j++) {
       $("#container").append(
-        `<div class="number-cell" id="number-cell-'+i+'-'+j+'"></div>`
+        '<div class="number-cell" id="number-cell-' + i + "-" + j + '"></div>'
       );
       var theNumberCell = $("#number-cell-" + i + "-" + j); // 操作当前坐标下的 number-cell 的值
 
@@ -53,4 +55,27 @@ function updateBoardView() {
         theNumberCell.text(board[i][j]);
       }
     }
+}
+
+function getOneNumber() {
+  if (nospace(board)) return false;
+
+  // 随机一个位置
+  var randX = parseInt(Math.floor(Math.random() * 4)); // floor 向下取整 (1,2,3,4)
+  var randY = parseInt(Math.floor(Math.random() * 4));
+  while (true) {
+    if (board[randX][randY] === 0) break; // 若随机位置上无元素
+    // 若随机位置上已有元素 则重新随机
+    randX = parseInt(Math.floor(Math.random() * 4));
+    randY = parseInt(Math.floor(Math.random() * 4));
+  }
+
+  // 随机一个数字 2和4的概率相同
+  var randNumber = Math.random() < 0.5 ? 2 : 4;
+
+  // 随机位置显示随机数字
+  board[randX][randY] = randNumber;
+  showNumberWithAnimation(randX, randY, randNumber);
+
+  return true;
 }

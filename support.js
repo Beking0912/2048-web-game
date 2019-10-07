@@ -50,3 +50,11 @@ function getNumberColor(number) {
   if (number <= 16) return "#0d47a1";
   return "white";
 }
+
+function nospace(board) {
+  for (var i = 0; i < 4; i++)
+    for (var j = 0; j < 4; j++) {
+      if (board[i][j] === 0) return false; // 棋盘格上还有空间
+    }
+  return true;
+}
