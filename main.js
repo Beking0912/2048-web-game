@@ -58,7 +58,7 @@ function updateBoardView() {
 }
 
 function getOneNumber() {
-  if (nospace(board)) return false;
+  if (noSpace(board)) return false;
 
   // 随机一个位置
   var randX = parseInt(Math.floor(Math.random() * 4)); // floor 向下取整 (1,2,3,4)
@@ -85,26 +85,26 @@ $(document).keydown(function(event) {
     case 37: // left
       if (moveLeft()) {
         // 是否有元素可以向左移动
-        getOneNumber(); // 随机生成一个数字
-        isGameOver(); // 游戏是否已结束
+        setTimeout("getOneNumber()", 210); // 随机生成一个数字
+        setTimeout("isGameOver()", 300); // 游戏是否已结束
       }
       break;
     case 38: // up
       if (moveUp()) {
-        getOneNumber();
-        isGameOver();
+        setTimeout("getOneNumber()", 210);
+        setTimeout("isGameOver()", 300);
       }
       break;
     case 39: // right
       if (moveRight()) {
-        getOneNumber();
-        isGameOver();
+        setTimeout("getOneNumber()", 210);
+        setTimeout("isGameOver()", 300);
       }
       break;
     case 40: // down
       if (moveDown()) {
-        getOneNumber();
-        isGameOver();
+        setTimeout("getOneNumber()", 210);
+        setTimeout("isGameOver()", 300);
       }
       break;
     default:
@@ -113,7 +113,15 @@ $(document).keydown(function(event) {
   }
 });
 
-function isGameOver() {}
+function isGameOver() {
+  if (noSpace(board) && noMove(board)) {
+    gameOver();
+  }
+}
+
+function gameOver() {
+  alert("game over~");
+}
 
 function moveLeft() {
   if (!canMoveLeft(board)) return false; // 能否向左移动
