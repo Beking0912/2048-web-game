@@ -120,7 +120,7 @@ function moveLeft() {
 
   // 左边有无数字？ 左边的数字是否与自己相等？
   for (var i = 0; i < 4; i++)
-    for (var j = 0; j < 4; j++) {
+    for (var j = 1; j < 4; j++) {
       if (board[i][j] !== 0) {
         for (var k = 0; k < j; k++)
           if (board[i][k] === 0 && noBlockH(i, k, j, board)) {
@@ -128,7 +128,7 @@ function moveLeft() {
             board[i][k] = board[i][j];
             board[i][j] = 0;
             continue;
-          } else if (board[i][k] === board[i][j] && noBlock(i, k, j, board)) {
+          } else if (board[i][k] === board[i][j] && noBlockH(i, k, j, board)) {
             showMoveAnimation(i, j, i, k);
             board[i][k] += board[i][j];
             board[i][j] = 0;
@@ -152,7 +152,7 @@ function moveRight() {
             board[i][k] = board[i][j];
             board[i][j] = 0;
             continue;
-          } else if (board[i][k] === board[i][j] && noBlock(i, k, j, board)) {
+          } else if (board[i][k] === board[i][j] && noBlockH(i, k, j, board)) {
             showMoveAnimation(i, j, i, k);
             board[i][k] *= 2;
             board[i][j] = 0;
@@ -176,7 +176,7 @@ function moveUp() {
             board[k][j] = board[i][j];
             board[i][j] = 0;
             continue;
-          } else if (board[k][j] === board[i][j] && noBlock(j, k, i, board)) {
+          } else if (board[k][j] === board[i][j] && noBlockV(j, k, i, board)) {
             showMoveAnimation(i, j, k, j);
             board[k][j] *= 2;
             board[i][j] = 0;
@@ -200,7 +200,7 @@ function moveDown() {
             board[k][j] = board[i][j];
             board[i][j] = 0;
             continue;
-          } else if (board[k][j] === board[i][j] && noBlock(j, i, k, board)) {
+          } else if (board[k][j] === board[i][j] && noBlockV(j, i, k, board)) {
             showMoveAnimation(i, j, k, j);
             board[k][j] *= 2;
             board[i][j] = 0;
